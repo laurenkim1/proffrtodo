@@ -6,7 +6,7 @@ var bodyParser = require('body-parser');
 
 router.use(bodyParser.json());
 var User = require('./User');
-var db = require('../db');
+var db = require('./db');
 
 // CREATES A NEW USER
 router.post('/', function (req, res) {
