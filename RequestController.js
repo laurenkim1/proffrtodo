@@ -6,7 +6,7 @@ var bodyParser = require('body-parser');
 
 router.use(bodyParser.json());
 var Request = require('./Request');
-var db = require('../db');
+var db = require('./db');
 
 // CREATES A NEW REQUEST
 router.post('/', function (req, res) {
