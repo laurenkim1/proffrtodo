@@ -58,7 +58,8 @@ router.get('/:radius', function (req, res) {
     var lon = parseFloat(req.query.lon);
     var rad = parseFloat(req.params.radius) * 1609.34;
     var geoloc = [ lon, lat ];
-    Request.find({ location: { $geoWithin: { $centerSphere: [ geoloc, rad ] } } }).sort({createdAt:-1}).exec(function (err, request) {
+    var start = new Date(new Date().getTime() - (24 * 60 * 60 * 1000));
+    Request.find({ location: { $geoWithin: { $centerSphere: [ geoloc, rad ] } }, createdAt: { $gte: start } }).sort({createdAt:-1}).exec(function (err, request) {
         console.log(err);
         if (err) return res.status(500).send("There was a problem finding the requests.");
         res.status(200).send(request);
