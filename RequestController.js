@@ -59,7 +59,7 @@ router.get('/:radius', function (req, res) {
     var rad = parseFloat(req.params.radius) * 1609.34;
     var geoloc = [ lon, lat ];
     var start = new Date(new Date().getTime() - (24 * 60 * 60 * 1000));
-    Request.find({ location: { $geoWithin: { $centerSphere: [ geoloc, rad ] } }, createdAt: { $gte: start } }).sort({createdAt:-1}).exec(function (err, request) {
+    Request.find({ location: { $geoWithin: { $centerSphere: [ geoloc, rad ] } }, createdAt: { $gte: start }, fulfilled: false }).sort({createdAt:-1}).exec(function (err, request) {
         console.log(err);
         if (err) return res.status(500).send("There was a problem finding the requests.");
         res.status(200).send(request);
@@ -77,7 +77,7 @@ router.delete('/:id', function (req, res) {
 // UPDATES A SINGLE REQUEST IN THE DATABASE
 router.put('/:id', function (req, res) {
 
-    Request.findByIdAndUpdate(req.params.id, req.body, {new: true}, function (err, request) {
+    Request.findByIdAndUpdate(req.params.id, { $set: req.body }, {new: true}, function (err, request) {
         if (err) return res.status(500).send("There was a problem updating the request.");
         res.status(200).send(request);
     });
