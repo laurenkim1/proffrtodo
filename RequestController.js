@@ -77,7 +77,7 @@ router.delete('/:id', function (req, res) {
 // UPDATES A SINGLE REQUEST IN THE DATABASE
 router.put('/:id', function (req, res) {
 
-    Request.findByIdAndUpdate(req.params.id, { $set: req.body }, {new: true}, function (err, request) {
+    Request.findByIdAndUpdate(req.params.id, { $set: req.body }, function (err, request) {
         if (err) return res.status(500).send("There was a problem updating the request.");
         res.status(200).send(request);
     });
