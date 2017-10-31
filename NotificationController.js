@@ -11,9 +11,9 @@ router.use(bodyParser.json());
 var Notification = require('./Notification');
 
 router.post('/', function (req, res) {
-    let msg = req.body;
+    var msg = req.body;
     console.log(msg)
-    let recipientId = req.body.userID
+    var recipientId = req.body.userID
     //messagebroker.publish("", recipientId, new Buffer(msg));
     Notification.create({
             createdAt: new Date(),
