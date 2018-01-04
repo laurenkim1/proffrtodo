@@ -55,7 +55,7 @@ router.get('/search/:id', function (req, res) {
 // GETS A USER REQUESTS FROM THE DATABASE
 
 router.get('/myRequests', function (req, res) {
-    Request.find({ userID: req.query.id }).sort({createdAt:-1})..limit(20)exec(function (err, request) {
+    Request.find({ userID: req.query.id }).sort({createdAt:-1}).limit(20).exec(function (err, request) {
         console.log(err);
         if (err) return res.status(500).send("There was a problem finding the requests.");
         res.status(200).send(request);
