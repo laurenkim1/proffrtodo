@@ -18,7 +18,7 @@ router.post('/', function (req, res) {
             userEmail: req.body.userEmail,
             userLocation: req.body.userLocation,
             fcmToken: req.body.fcmToken,
-            userRequests: []
+            rating: 5
         },
         function (err, user) {
             if (err) return res.status(500).send("There was a problem adding the information to the user database.");
@@ -84,6 +84,7 @@ router.put('/:id', function (req, res) {
     });
 });
 
+/*
 // ADD NEW REQUEST TO USER PROFILE
 router.put('/newreq/:id', function (req, res) {
     db.collection("users").update({ "userId": req.params.id }, { $push: { "userRequests": req.body } }, function (err, user) {
@@ -91,5 +92,6 @@ router.put('/newreq/:id', function (req, res) {
         res.status(200).send(user);
     });
 });
+*/
 
 module.exports = router;

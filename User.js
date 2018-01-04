@@ -10,7 +10,7 @@ var UserSchema = new mongoose.Schema({
   userEmail: String,
   userLocation: Object,
   fcmToken: String,
-  userRequests: [Object]
+  rating: Number,
 });
 mongoose.model('User', UserSchema, "users");
 module.exports = mongoose.model('User');
