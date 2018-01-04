@@ -33,7 +33,7 @@ router.post('/', function (req, res) {
 // RETURNS ALL THE REQUESTS IN THE DATABASE
 router.get('/', function (req, res) {
     Request.find({ 
-  "createdAt" : { 
+  createdAt : { 
     $lt: new Date(), 
     $gte: new Date(new Date().setDate(new Date().getDate()-1))
   }}, function (err, requests) {
@@ -48,6 +48,16 @@ router.get('/search/:id', function (req, res) {
     Request.findById(req.params.id, function (err, request) {
         if (err) return res.status(500).send("There was a problem finding the request.");
         if (!request) return res.status(404).send("No request found.");
+        res.status(200).send(request);
+    });
+});
+
+// GETS A USER REQUESTS FROM THE DATABASE
+
+router.get('/myRequests', function (req, res) {
+    Request.find({ userID: req.query.id }).sort({createdAt:-1})..limit(20)exec(function (err, request) {
+        console.log(err);
+        if (err) return res.status(500).send("There was a problem finding the requests.");
         res.status(200).send(request);
     });
 });
