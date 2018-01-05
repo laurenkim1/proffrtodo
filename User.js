@@ -11,6 +11,7 @@ var UserSchema = new mongoose.Schema({
   userLocation: Object,
   fcmToken: String,
   rating: Number,
+  numRatings: Number
 });
 mongoose.model('User', UserSchema, "users");
 module.exports = mongoose.model('User');

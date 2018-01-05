@@ -18,7 +18,8 @@ router.post('/', function (req, res) {
             userEmail: req.body.userEmail,
             userLocation: req.body.userLocation,
             fcmToken: req.body.fcmToken,
-            rating: 5
+            rating: 5,
+            numRatings: 1
         },
         function (err, user) {
             if (err) return res.status(500).send("There was a problem adding the information to the user database.");
@@ -83,6 +84,23 @@ router.put('/:id', function (req, res) {
         res.status(200).send(user);
     });
 });
+
+
+// UPDATES A SINGLE USER RATINGIN THE DATABASE
+router.put('rating/:id', function (req, res) {
+    rate = req.body.rating;
+    User.findOne({ userId: req.params.id }).then(function(err, user) {
+        if (err) return res.status(500).send("There was a problem updating the user.");
+        user.rating = ((user.rating * user.numRatings) + rate) / (user.numRatings + 1);
+        user.numRatings = user.numRatings + 1;
+
+        user.save(function (newerr) {
+            if (newerr) return res.status(500).send("There was a problem updating the user.");
+        });
+        res.status(200).send(user);
+    });
+});
+
 
 /*
 // ADD NEW REQUEST TO USER PROFILE
