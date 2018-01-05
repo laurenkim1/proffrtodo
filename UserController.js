@@ -88,13 +88,10 @@ router.put('/:id', function (req, res) {
 // UPDATES A SINGLE USER RATINGIN THE DATABASE
 router.put('/rating/:id', function (req, res) {
     rate = req.body.rating;
-    console.log(rate);
-    db.collection("users").findOne({ userId: req.params.id }, function(err, user) {
+    User.findOne({ userId: req.params.id }, function(err, user) {
         if (err) return res.status(500).send("There was a problem updating the user.");
         user.rating = ((user.rating * user.numRatings) + rate) / (user.numRatings + 1);
         user.numRatings = user.numRatings + 1;
-        console.log(user.numRatings);
-
         user.save(function (newerr) {
             if (newerr) return res.status(500).send("There was a problem updating the user.");
         });
