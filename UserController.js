@@ -39,6 +39,7 @@ router.get('/:id', function (req, res) {
     User.find({ userId: req.params.id }, function (err, user) {
         if (err) return res.status(500).send("There was a problem finding the user.");
         if (!user) return res.status(404).send("No user found.");
+        console.log("hi");
         res.status(200).send(user);
     });
 });
@@ -64,7 +65,6 @@ router.get('/myRequests/:id', function (req, res) {
         if (!user) return res.status(404).send("No user found.");
         var myRequests = user.userRequests;
         if (!myRequests) return res.status(404).send("No requests for user.");
-        console.log(myRequests);
         res.status(200).send(myRequests);
     });
 });
