@@ -8,7 +8,7 @@ var options = {
 	useMongoClient: true
 };
 
-var db = mongoose.connect('mongodb://laurenkim:jihye197@ds241677.mlab.com:41677/proffr', options);
+var db = mongoose.connect('mongodb://laurenkim:jihye197@ds241677.mlab.com:41677/proffer', options);
 
 var RequestController = require('./RequestController');
 app.use('/requests', RequestController);
