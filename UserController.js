@@ -86,7 +86,7 @@ router.put('/:id', function (req, res) {
 
 
 // UPDATES A SINGLE USER RATINGIN THE DATABASE
-router.put('rating/:id', function (req, res) {
+router.put('/rating/:id', function (req, res) {
     rate = req.body.rating;
     User.findOne({ userId: req.params.id }).then(function(err, user) {
         if (err) return res.status(500).send("There was a problem updating the user.");
