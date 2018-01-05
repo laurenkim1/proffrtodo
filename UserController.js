@@ -36,10 +36,9 @@ router.get('/', function (req, res) {
 
 // GETS A SINGLE USER FROM THE DATABASE
 router.get('/:id', function (req, res) {
-    User.find({ userId: req.params.id }, function (err, user) {
+    db.collection("users").find({ userId: req.params.id }, function (err, user) {
         if (err) return res.status(500).send("There was a problem finding the user.");
         if (!user) return res.status(404).send("No user found.");
-        console.log("hi");
         res.status(200).send(user);
     });
 });
