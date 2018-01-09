@@ -84,8 +84,21 @@ router.put('/:id', function (req, res) {
     });
 });
 
+// UPDATES A SINGLE USER FCMTOKEN IN THE DATABASE
+router.put('/fcmtoken/:id', function (req, res) {
+    token = req.body.token;
+    User.findOne({ userId: req.params.id }, function(err, user) {
+        if (err) return res.status(500).send("There was a problem updating the user.");
+        user.fcmToken = token;
+        user.save(function (newerr) {
+            if (newerr) return res.status(500).send("There was a problem updating the user.");
+        });
+        res.status(200).send(user);
+    });
+});
 
-// UPDATES A SINGLE USER RATINGIN THE DATABASE
+
+// UPDATES A SINGLE USER RATING IN THE DATABASE
 router.put('/rating/:id', function (req, res) {
     rate = req.body.rating;
     User.findOne({ userId: req.params.id }, function(err, user) {
