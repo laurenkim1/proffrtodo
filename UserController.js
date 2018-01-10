@@ -89,11 +89,13 @@ router.put('/fcmtoken/:id', function (req, res) {
     token = req.body.fcmtoken;
     User.findOne({ userId: req.params.id }, function(err, user) {
         if (err) return res.status(500).send("There was a problem updating the user.");
-        user.fcmToken = token;
-        user.save(function (newerr) {
-            if (newerr) return res.status(500).send("There was a problem updating the user.");
-        });
-        res.status(200).send(user);
+        if (token != null) {
+            user.fcmToken = token;
+            user.save(function (newerr) {
+                if (newerr) return res.status(500).send("There was a problem updating the user.");
+            });
+            res.status(200).send(user);
+        }
     });
 });
 
@@ -103,6 +105,7 @@ router.put('/location/:id', function (req, res) {
     User.findOne({ userId: req.params.id }, function(err, user) {
         if (err) return res.status(500).send("There was a problem updating the user.");
         user.userLocation = location;
+        user.fcmToken = user.fcmToken;
         user.save(function (newerr) {
             if (newerr) return res.status(500).send("There was a problem updating the user.");
         });
