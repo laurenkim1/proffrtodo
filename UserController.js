@@ -19,7 +19,8 @@ router.post('/', function (req, res) {
             userLocation: req.body.userLocation,
             fcmToken: req.body.fcmToken,
             rating: 5,
-            numRatings: 1
+            numRatings: 1,
+            badgeCount: 0
         },
         function (err, user) {
             if (err) return res.status(500).send("There was a problem adding the information to the user database.");
