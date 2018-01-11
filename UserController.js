@@ -87,7 +87,8 @@ router.put('/:id', function (req, res) {
 
 // UPDATES A SINGLE USER FCMTOKEN IN THE DATABASE
 router.put('/fcmtoken/:id', function (req, res) {
-    token = req.body.fcmtoken;
+    token = req.body.token;
+    console.log(token);
     User.findOne({ userId: req.params.id }, function(err, user) {
         if (err) return res.status(500).send("There was a problem updating the user.");
         if (token != null) {
