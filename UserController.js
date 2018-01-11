@@ -99,6 +99,27 @@ router.put('/fcmtoken/:id', function (req, res) {
     });
 });
 
+// UPDATES A SINGLE USER FCMTOKEN IN THE DATABASE
+router.put('/badge/:id', function (req, res) {
+    badge = req.body.badgeCount;
+    User.findOne({ userId: req.params.id }, function(err, user) {
+        if (err) return res.status(500).send("There was a problem updating the user.");
+        if (badge == 1) {
+            user.badgeCount = user.badgeCount + 1;
+            user.save(function (newerr) {
+                if (newerr) return res.status(500).send("There was a problem updating the user.");
+            });
+            res.status(200).send(user);
+        } else {
+            user.badgeCount = 0;
+            user.save(function (newerr) {
+                if (newerr) return res.status(500).send("There was a problem updating the user.");
+            });
+            res.status(200).send(user);
+        }
+    });
+});
+
 // UPDATES A SINGLE USER LOCATION IN THE DATABASE
 router.put('/location/:id', function (req, res) {
     location = req.body.location;
