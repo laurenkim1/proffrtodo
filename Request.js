@@ -14,6 +14,7 @@ var RequestSchema = new mongoose.Schema({
   distance: Number,
   location: Object,
   photoUrl: String,
+  rent: Number
 });
 mongoose.model('Request', RequestSchema, "requests");
 module.exports = mongoose.model('Request');

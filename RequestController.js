@@ -22,7 +22,8 @@ router.post('/', function (req, res) {
             pickUp: req.body.pickUp,
             distance: req.body.distance,
             location: req.body.location,
-            photoUrl: req.body.photoUrl
+            photoUrl: req.body.photoUrl,
+            rent: req.body.rent
         },
         function (err, request) {
             console.log(err)
