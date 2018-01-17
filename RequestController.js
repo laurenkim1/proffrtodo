@@ -67,7 +67,7 @@ router.get('/myRequests', function (req, res) {
 router.get('/:radius', function (req, res) {
     var lat = parseFloat(req.query.lat);
     var lon = parseFloat(req.query.lon);
-    var rad = parseFloat(req.params.radius) * 1609.34;
+    var rad = parseFloat(req.params.radius) / 3963.2;
     var geoloc = [ lon, lat ];
     console.log(rad);
     console.log(lon);
